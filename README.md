@@ -1,59 +1,35 @@
-# MaktubPage
+# maktub-page
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.27.
+The maktub web front — the portfolio homepage seed, and the browser landing that
+completes the **email-confirmation** and **password-reset** links for the apps
+(so they work from any device, not just the phone with the app installed).
 
-## Development server
+Angular 19 SPA, deployed to **GitHub Pages** at
+`https://shadycoll.github.io/maktub-page/`.
 
-To start a local development server, run:
+## Routes
 
-```bash
-ng serve
+- `/` — minimal landing (grows into the homepage)
+- `/auth` — Supabase redirect target: shows "email confirmed", or a
+  password-reset form (branches on the auth event)
+- `/datenschutz` — Datenschutzerklärung (DSGVO)
+- `/impressum` — Impressum (§5 DDG)
+
+## Develop
+
+```sh
+npm install
+npm start                       # ng serve → http://localhost:4200
+npm test -- --watch=false --browsers=ChromeHeadless
+npx ng build --base-href /maktub-page/
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Deploy (GitHub Pages)
 
-## Code scaffolding
+`.github/workflows/deploy.yml` builds and deploys on every push to `main`.
+**One-time setup (founder):** create the GitHub repo `maktub-page`, push, then in
+**Settings → Pages** set the source to **GitHub Actions**. The workflow copies
+`index.html` to `404.html` so deep links + Supabase's URL tokens work on Pages.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+After the first deploy, allowlist `https://shadycoll.github.io/maktub-page/auth`
+in Supabase → Authentication → URL Configuration (redirect URLs).
