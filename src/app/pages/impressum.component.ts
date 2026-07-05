@@ -12,29 +12,23 @@ import { RouterLink } from '@angular/router';
 
       <h2>Angaben gemäß § 5 DDG</h2>
       <p>
-        [NAME / FIRMA]<br />
-        [STRASSE UND HAUSNUMMER]<br />
-        [PLZ ORT]<br />
+        Maktub Al Kheir UG (haftungsbeschränkt)<br />
+        Pestalozzistraße 95<br />
+        10625 Berlin<br />
         Deutschland
       </p>
 
       <h2>Kontakt</h2>
-      <p>E-Mail: [KONTAKT-E-MAIL]</p>
+      <p>E-Mail: shady.collexposito@outlook.de</p>
 
       <h2>Vertreten durch</h2>
-      <p>[VERANTWORTLICHE PERSON]</p>
-
-      <h2>Umsatzsteuer-ID</h2>
-      <p>
-        Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br />
-        [USt-IdNr. — oder diesen Abschnitt entfernen, falls nicht vorhanden]
-      </p>
+      <p>Shady Paul Coll Exposito</p>
 
       <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
       <p>
-        [NAME]<br />
-        [STRASSE UND HAUSNUMMER]<br />
-        [PLZ ORT]
+        Shady Paul Coll Exposito<br />
+        Pestalozzistraße 95<br />
+        10625 Berlin
       </p>
 
       <h2>Haftung für Inhalte</h2>
