@@ -19,7 +19,7 @@ import { RouterLink } from '@angular/router';
       </p>
 
       <h2>Kontakt</h2>
-      <p>E-Mail: shady.collexposito@outlook.de</p>
+      <p>E-Mail: shady.collexposito&#64;outlook.de</p>
 
       <h2>Vertreten durch</h2>
       <p>Shady Paul Coll Exposito</p>
