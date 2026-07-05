@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import type { Subscription } from '@supabase/supabase-js';
 
 import { SupabaseService } from '../../core/supabase.service';
+import { ResetPasswordFormComponent } from './reset-password-form.component';
 
 export type AuthMode = 'loading' | 'confirmed' | 'recovery' | 'invalid';
 
@@ -15,6 +16,7 @@ export type AuthMode = 'loading' | 'confirmed' | 'recovery' | 'invalid';
 /// - no session at all → `invalid` (link expired / already used).
 @Component({
   selector: 'app-auth',
+  imports: [ResetPasswordFormComponent],
   template: `
     @switch (mode()) {
       @case ('loading') {
@@ -25,8 +27,7 @@ export type AuthMode = 'loading' | 'confirmed' | 'recovery' | 'invalid';
         <p>Du kannst Sukun jetzt öffnen und nutzen.</p>
       }
       @case ('recovery') {
-        <!-- Task 4 replaces this with <app-reset-password-form />. -->
-        <p data-testid="recovery-placeholder">Neues Passwort setzen</p>
+        <app-reset-password-form />
       }
       @case ('invalid') {
         <h1>Link ungültig</h1>
