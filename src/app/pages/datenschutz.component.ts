@@ -14,10 +14,10 @@ import { RouterLink } from '@angular/router';
       <h2>1. Verantwortlicher</h2>
       <p>
         Verantwortlich für die Datenverarbeitung ist:<br />
-        [NAME / FIRMA]<br />
-        [STRASSE UND HAUSNUMMER]<br />
-        [PLZ ORT]<br />
-        E-Mail: [KONTAKT-E-MAIL]
+        Maktub Al Kheir UG (haftungsbeschränkt)<br />
+        Pestalozzistraße 95<br />
+        10625 Berlin<br />
+        E-Mail: shady.collexposito@outlook.de
       </p>
 
       <h2>2. Überblick</h2>
