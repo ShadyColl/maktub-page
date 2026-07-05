@@ -17,7 +17,7 @@ import { RouterLink } from '@angular/router';
         Maktub Al Kheir UG (haftungsbeschränkt)<br />
         Pestalozzistraße 95<br />
         10625 Berlin<br />
-        E-Mail: shady.collexposito@outlook.de
+        E-Mail: shady.collexposito&#64;outlook.de
       </p>
 
       <h2>2. Überblick</h2>
