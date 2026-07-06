@@ -60,9 +60,10 @@ import { RouterLink } from '@angular/router';
 
       <h2>6. Speicherung, Region und Sicherheit</h2>
       <p>
-        Server-seitige Daten werden bei unserem Auftragsverarbeiter Supabase
-        gespeichert [Region: EU — bitte bestätigen]. Die Übertragung erfolgt
-        verschlüsselt (TLS); auch die Speicherung auf dem Server ist verschlüsselt.
+        Server-seitige Daten werden bei unserem Auftragsverarbeiter Supabase in der
+        Europäischen Union gespeichert (Region eu-west-1, Irland). Die Übertragung
+        erfolgt verschlüsselt (TLS); auch die Speicherung auf dem Server ist
+        verschlüsselt.
       </p>
       <p>
         <strong>Hinweis zur lokalen Speicherung:</strong> Die App speichert deine
@@ -104,7 +105,10 @@ import { RouterLink } from '@angular/router';
         <li>Widerspruch (Art. 21) und Einschränkung der Verarbeitung (Art. 18).</li>
         <li>Beschwerde bei einer Datenschutz-Aufsichtsbehörde (Art. 77).</li>
       </ul>
-      <p>Zur Ausübung deiner Rechte genügt eine Nachricht an [KONTAKT-E-MAIL].</p>
+      <p>
+        Zur Ausübung deiner Rechte genügt eine Nachricht an
+        shady.collexposito&#64;outlook.de.
+      </p>
 
       <p><a routerLink="/impressum">Impressum</a></p>
     </main>

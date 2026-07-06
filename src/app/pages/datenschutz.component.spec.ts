@@ -19,7 +19,7 @@ describe('DatenschutzComponent', () => {
       'Datenschutzerklärung',
     );
     expect(text).toContain('Verantwortlicher');
-    expect(text).toContain('[KONTAKT-E-MAIL]');
+    expect(text).toContain('shady.collexposito');
     // Honesty about the unencrypted local DB (per the W3.3 decision).
     expect(text).toContain('nicht gesondert verschlüsselt');
     // Data-subject rights incl. the built-in deletion/export.
