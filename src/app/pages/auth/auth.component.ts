@@ -1,19 +1,25 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
-import type { Subscription } from '@supabase/supabase-js';
+import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import type { EmailOtpType, Subscription } from '@supabase/supabase-js';
 
 import { SupabaseService } from '../../core/supabase.service';
 import { ResetPasswordFormComponent } from './reset-password-form.component';
 
 export type AuthMode = 'loading' | 'confirmed' | 'recovery' | 'invalid';
 
-/// The redirect target for both Supabase email links. It branches on the auth
-/// event Supabase fires after processing the URL:
-/// - `PASSWORD_RECOVERY` → the reset form (Task 4). This ALWAYS wins: it's set
-///   unconditionally so it overrides a `confirmed` that a premature
-///   session-bearing event may have set first (the two can race during URL
-///   processing).
-/// - a session-bearing sign-in with no recovery → `confirmed` landing.
-/// - no session at all → `invalid` (link expired / already used).
+/// The redirect target for both Supabase email links.
+///
+/// **Primary path — `token_hash` + `verifyOtp` (cross-device).** The email
+/// templates link here with `?token_hash=…&type=signup|recovery`. `verifyOtp`
+/// exchanges that hash for a session WITHOUT a PKCE code_verifier — which is
+/// essential, because sign-up / reset are initiated in the Flutter app, so a
+/// verifier would only ever live on that device, never in this browser. This is
+/// the only way "confirm/reset from any device" can work.
+///
+/// **Fallback — implicit fragment.** A `#access_token=…` link (implicit flow)
+/// is handled by `detectSessionInUrl` firing an auth event: `PASSWORD_RECOVERY`
+/// → the reset form (wins unconditionally over a racing `confirmed`); a
+/// session-bearing sign-in → `confirmed`; no session at all → `invalid`.
 @Component({
   selector: 'app-auth',
   imports: [ResetPasswordFormComponent],
@@ -40,9 +46,27 @@ export class AuthComponent implements OnInit, OnDestroy {
   readonly mode = signal<AuthMode>('loading');
   private authSub?: Subscription;
 
-  constructor(private readonly supabase: SupabaseService) {}
+  private readonly supabase = inject(SupabaseService);
+  private readonly route = inject(ActivatedRoute);
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    const params = this.route.snapshot.queryParamMap;
+    const tokenHash = params.get('token_hash');
+    const type = params.get('type');
+
+    // Primary, cross-device path.
+    if (tokenHash && type) {
+      const { error } = await this.supabase.client.auth.verifyOtp({
+        token_hash: tokenHash,
+        type: type as EmailOtpType,
+      });
+      this.mode.set(
+        error ? 'invalid' : type === 'recovery' ? 'recovery' : 'confirmed',
+      );
+      return;
+    }
+
+    // Fallback: implicit-fragment links.
     const { data } = this.supabase.client.auth.onAuthStateChange(
       (event, session) => {
         if (event === 'PASSWORD_RECOVERY') {
@@ -54,8 +78,6 @@ export class AuthComponent implements OnInit, OnDestroy {
     );
     this.authSub = data.subscription;
 
-    // Fallback for the "no session" case: an expired/used link fires no
-    // session-bearing event, so `mode` would stay `loading` forever.
     void this.supabase.client.auth.getSession().then(({ data: { session } }) => {
       if (!session && this.mode() === 'loading') {
         this.mode.set('invalid');
