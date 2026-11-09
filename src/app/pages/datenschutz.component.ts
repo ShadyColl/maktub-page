@@ -38,7 +38,10 @@ import { LEGAL_LAST_UPDATED, PROVIDER } from '../core/provider';
       <section class="card" aria-labelledby="kurz">
         <h2 id="kurz">Kurz gesagt</h2>
         <ul>
-          <li>Niyya funktioniert ohne Konto. Dann bleiben deine Daten auf deinem Gerät.</li>
+          <li>
+            Niyya funktioniert ohne Konto, in jedem Alter. Dann bleiben deine Daten auf deinem
+            Gerät. Ein Konto gibt es ab 16 Jahren.
+          </li>
           <li>
             Mit Konto speichern wir deine Inhalte auf einem Server in der EU, damit sie auf
             all deinen Geräten gleich sind.
@@ -100,6 +103,10 @@ import { LEGAL_LAST_UPDATED, PROVIDER } from '../core/provider';
       </p>
 
       <h2 id="konto">3. Dein Konto</h2>
+      <p>
+        Ein Konto kannst du <strong>ab 16 Jahren</strong> anlegen. Bist du jünger, nutzt du
+        Niyya ohne Konto. Das geht in jedem Alter, denn dann bleibt alles auf deinem Gerät.
+      </p>
       <p>Für ein Konto brauchst du eine E-Mail-Adresse und ein Passwort. Wir speichern:</p>
       <ul>
         <li>deine E-Mail-Adresse,</li>
@@ -190,6 +197,8 @@ import { LEGAL_LAST_UPDATED, PROVIDER } from '../core/provider';
       <p>
         Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Du widerrufst sie,
         indem du den Schalter ausschaltest. Was vorher gesendet wurde, bleibt davon unberührt.
+        Bist du jünger als 16, frag bitte deine Eltern, bevor du Fehlerberichte einschaltest
+        (Art. 8 DSGVO).
       </p>
 
       <h2 id="server">6. Wo die Daten liegen</h2>

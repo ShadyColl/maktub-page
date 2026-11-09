@@ -24,6 +24,12 @@ describe('DatenschutzComponent', () => {
     expect(el.textContent).toContain('shady.collexposito');
   });
 
+  it('states the minimum age for an account (owner 2026-11-09)', () => {
+    const text = render().textContent ?? '';
+    expect(text).toContain('ab 16 Jahren');
+    expect(text).toContain('in jedem Alter');
+  });
+
   it('matches the real data flows of the app', () => {
     const text = render().textContent ?? '';
     // Fehlerberichte sind seit 2026-10-13 opt-in (L-01).
