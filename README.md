@@ -55,6 +55,11 @@ built page stays blank. CI builds on Linux and is not affected.
 ## Deploy (GitHub Pages)
 
 `.github/workflows/deploy.yml` builds and deploys on every push to `main`.
+It copies `index.html` to one file per route (`niyya.html`, `datenschutz.html`,
+`niyya/konto-loeschen.html`, …). GitHub Pages serves `/datenschutz` from
+`datenschutz.html` with HTTP 200 and no redirect, instead of through `404.html`
+with status 404. Store reviews check those links. **A new route must be added to that
+list** in the workflow.
 **One-time setup (founder):** create the GitHub repo `maktub-page`, push, then in
 **Settings → Pages** set the source to **GitHub Actions**. The workflow copies
 `index.html` to `404.html` so deep links + Supabase's URL tokens work on Pages.

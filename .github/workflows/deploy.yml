@@ -30,6 +30,23 @@ jobs:
       # copy of index.html lets the Angular router handle deep links like /auth
       # (and preserves the query/fragment Supabase appends to the URL).
       - run: cp dist/maktub-page/browser/index.html dist/maktub-page/browser/404.html
+      # Die 404.html liefert zwar die richtige Seite, aber mit HTTP-Status 404.
+      # Store-Prüfungen (Google Play, App Store) können den Datenschutz- oder
+      # Konto-löschen-Link dann als kaputt werten. Deshalb bekommt jede feste
+      # Route eine Kopie als <route>.html: GitHub Pages liefert /impressum
+      # dann direkt aus impressum.html mit Status 200, ohne Umleitung (ein
+      # Ordner impressum/index.html hätte erst per 301 auf /impressum/
+      # umgeleitet). Neue Route in src/app/app.routes.ts → hier eintragen.
+      - name: Per-route HTML (HTTP 200 for deep links)
+        run: |
+          cd dist/maktub-page/browser
+          for route in niyya niyya/konto-loeschen datenschutz impressum auth; do
+            mkdir -p "$(dirname "$route")"
+            cp index.html "$route.html"
+          done
+          # /niyya ist zugleich Datei und Ordner (niyya/konto-loeschen.html).
+          # Leitet Pages dort auf /niyya/ um, steht auch da eine Seite mit 200.
+          cp index.html niyya/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/maktub-page/browser

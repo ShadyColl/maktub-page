@@ -9,6 +9,10 @@ import { KontoLoeschenComponent } from './pages/niyya/konto-loeschen.component';
 /// `/datenschutz` und `/impressum` bleiben an der Wurzel: die App verlinkt sie
 /// so (`kImpressumUrl`, `kDatenschutzUrl` im Niyya-Repo), und ein geänderter
 /// Pfad bräuchte ein App-Update.
+///
+/// Jede neue Route gehört auch in die Liste in `.github/workflows/deploy.yml`
+/// („Per-route HTML“). Sonst liefert GitHub Pages sie über die 404.html
+/// aus: die Seite erscheint, aber mit HTTP-Status 404.
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Maktub Al Kheir' },
   { path: 'niyya', component: NiyyaComponent, title: 'Niyya' },
