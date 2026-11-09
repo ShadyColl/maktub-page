@@ -1,1 +1,10 @@
 <router-outlet />
+<footer class="site-footer">
+  <nav aria-label="Rechtliches">
+    <a routerLink="/niyya">Niyya</a>
+    <a routerLink="/niyya/konto-loeschen">Konto löschen</a>
+    <a routerLink="/datenschutz">Datenschutz</a>
+    <a routerLink="/impressum">Impressum</a>
+  </nav>
+  <p>© {{ year }} {{ provider.name }}</p>
+</footer>
