@@ -1,34 +1,26 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
 
 import { NIYYA_FEATURES, NiyyaComponent } from './niyya.component';
 
 describe('NiyyaComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      providers: [provideRouter([{ path: 'niyya', component: NiyyaComponent }])],
+      imports: [NiyyaComponent],
+      providers: [provideRouter([])],
     }),
   );
 
-  it('shows name, every feature and the legal links (variant A by default)', async () => {
-    const harness = await RouterTestingHarness.create();
-    await harness.navigateByUrl('/niyya');
-    const el = harness.routeNativeElement as HTMLElement;
+  it('shows the name, one tile per feature and the legal links', () => {
+    const fixture = TestBed.createComponent(NiyyaComponent);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
     expect(el.querySelector('h1')?.textContent).toContain('Niyya');
-    for (const f of NIYYA_FEATURES) {
-      expect(el.textContent).toContain(f.title);
-    }
-    expect(el.querySelector('.feature-list')).not.toBeNull();
+    const tiles = el.querySelectorAll('.tile');
+    expect(tiles.length).toBe(NIYYA_FEATURES.length);
+    NIYYA_FEATURES.forEach((f, i) => expect(tiles[i].textContent).toContain(f.title));
     const hrefs = Array.from(el.querySelectorAll('a')).map((a) => a.getAttribute('href'));
     expect(hrefs).toContain('/datenschutz');
     expect(hrefs).toContain('/niyya/konto-loeschen');
-  });
-
-  it('renders the tiles for ?v=b', async () => {
-    const harness = await RouterTestingHarness.create();
-    await harness.navigateByUrl('/niyya?v=b');
-    const el = harness.routeNativeElement as HTMLElement;
-    expect(el.querySelectorAll('.tile').length).toBe(NIYYA_FEATURES.length);
   });
 });

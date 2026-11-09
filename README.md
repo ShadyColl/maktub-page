@@ -10,8 +10,7 @@ Angular 19 SPA, deployed to **GitHub Pages** at
 ## Routes
 
 - `/` — provider homepage (today the holding; becomes the operating company's page)
-- `/niyya` — the Niyya product page. Two layouts for the founder to pick from:
-  `?v=a` (default, text column) and `?v=b` (tiles); the loser gets removed.
+- `/niyya` — the Niyya product page (header card, features as tiles)
 - `/niyya/konto-loeschen` — account deletion without the app (required by Google
   Play): in-app steps plus a request by email
 - `/auth` — Supabase redirect target: shows "email confirmed", or a

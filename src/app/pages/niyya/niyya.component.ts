@@ -1,12 +1,10 @@
-import { Component, computed, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { map } from 'rxjs';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { PROVIDER } from '../../core/provider';
 
-/// Was Niyya kann, in wenigen Sätzen. Eine Liste, damit beide Varianten
-/// dasselbe sagen.
+/// Was Niyya kann, in wenigen Sätzen. Jede Aussage ist an `docs/features.md`
+/// im Niyya-Repo geprüft (2026-11-09).
 export interface Feature {
   readonly title: string;
   readonly text: string;
@@ -39,16 +37,14 @@ export const NIYYA_FEATURES: readonly Feature[] = [
   },
 ];
 
-/// Die Seite von Niyya.
-///
-/// Zwei Fassungen zur Auswahl durch den Eigentümer (Geschmacksfrage,
-/// 2026-11-09): `?v=a` eine ruhige Textspalte, `?v=b` Kacheln. Ohne
-/// Parameter gilt A. Nach der Wahl fällt die andere Fassung samt Parameter weg.
+/// Die Seite von Niyya: Kopf in einer Karte, die Funktionen als Kacheln.
+/// Gewählt vom Eigentümer am 2026-11-09 (Fassung B; die Textspalte A ist
+/// entfallen).
 @Component({
   selector: 'app-niyya',
   imports: [RouterLink],
   template: `
-    <main class="page" [class.variant-b]="variant() === 'b'">
+    <main class="page">
       <header class="hero">
         <img src="niyya-icon.png" alt="" width="88" height="88" />
         <h1>Niyya</h1>
@@ -58,23 +54,14 @@ export const NIYYA_FEATURES: readonly Feature[] = [
 
       <section aria-labelledby="was-niyya-kann">
         <h2 id="was-niyya-kann">Was Niyya kann</h2>
-        @if (variant() === 'b') {
-          <ul class="tiles">
-            @for (f of features; track f.title) {
-              <li class="tile">
-                <h3>{{ f.title }}</h3>
-                <p>{{ f.text }}</p>
-              </li>
-            }
-          </ul>
-        } @else {
-          <dl class="feature-list">
-            @for (f of features; track f.title) {
-              <dt>{{ f.title }}</dt>
-              <dd>{{ f.text }}</dd>
-            }
-          </dl>
-        }
+        <ul class="tiles">
+          @for (f of features; track f.title) {
+            <li class="tile">
+              <h3>{{ f.title }}</h3>
+              <p>{{ f.text }}</p>
+            </li>
+          }
+        </ul>
       </section>
 
       <section class="card" aria-labelledby="deine-daten">
@@ -103,7 +90,10 @@ export const NIYYA_FEATURES: readonly Feature[] = [
   styles: `
     .hero {
       text-align: center;
-      padding: 1.5rem 0 1rem;
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 2rem 1rem 1.5rem;
+      margin-bottom: 1rem;
     }
     .hero img {
       border-radius: 22px;
@@ -121,14 +111,6 @@ export const NIYYA_FEATURES: readonly Feature[] = [
       border: 1px solid var(--line);
       border-radius: 999px;
       padding: 0.3rem 0.9rem;
-    }
-    .feature-list dt {
-      font-weight: 600;
-      margin-top: 1rem;
-    }
-    .feature-list dd {
-      margin: 0.1rem 0 0;
-      color: var(--muted);
     }
     .tiles {
       list-style: none;
@@ -153,26 +135,9 @@ export const NIYYA_FEATURES: readonly Feature[] = [
       color: var(--muted);
       font-size: 0.9688rem;
     }
-    .variant-b .hero {
-      background: var(--surface);
-      border-radius: 24px;
-      padding: 2rem 1rem 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .variant-b .hero .soon {
-      border-color: var(--line);
-    }
   `,
 })
 export class NiyyaComponent {
-  private readonly route = inject(ActivatedRoute);
-
   readonly features = NIYYA_FEATURES;
   readonly email = PROVIDER.email;
-
-  private readonly v = toSignal(
-    this.route.queryParamMap.pipe(map((p) => p.get('v'))),
-    { initialValue: null },
-  );
-  readonly variant = computed(() => (this.v() === 'b' ? 'b' : 'a'));
 }
