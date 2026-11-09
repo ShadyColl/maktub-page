@@ -23,10 +23,12 @@ describe('ImpressumComponent', () => {
     expect(text).toContain('shady.collexposito');
   });
 
-  it('marks a missing register entry as a visible placeholder', () => {
+  it('shows the register entry and no placeholder is left', () => {
     const fixture = TestBed.createComponent(ImpressumComponent);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.querySelector('.placeholder')?.textContent).toContain('PLATZHALTER');
+    expect(el.textContent).toContain('Amtsgericht Charlottenburg, HRB 271070 B');
+    expect(el.querySelector('.placeholder')).toBeNull();
+    expect(el.textContent).not.toContain('PLATZHALTER');
   });
 });

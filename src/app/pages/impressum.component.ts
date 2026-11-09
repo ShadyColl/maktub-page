@@ -4,8 +4,8 @@ import { RouterLink } from '@angular/router';
 import { PROVIDER } from '../core/provider';
 
 /// Impressum nach § 5 DDG. Die Angaben kommen aus [PROVIDER]; beim Wechsel zur
-/// operativen Gesellschaft wird nur dort getauscht. Registergericht und
-/// Nummer fehlen noch (Platzhalter, gelb markiert). Entwurf, keine
+/// operativen Gesellschaft wird nur dort getauscht. Ein noch fehlender Wert
+/// erscheint gelb markiert (`[PLATZHALTER …]`). Entwurf, keine
 /// Rechtsberatung.
 ///
 /// Kein Hinweis auf die EU-Plattform zur Online-Streitbeilegung mehr: die

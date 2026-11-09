@@ -7,7 +7,7 @@
 /// `niyya/lib/features/settings/presentation/widgets/about_settings_section.dart`
 /// (`_companyName`), der muss beim Wechsel mitgezogen werden.
 ///
-/// `register` ist noch ein Platzhalter: Registergericht und Nummer fehlen.
+/// Ein Wert, der mit `[PLATZHALTER` beginnt, erscheint im Impressum gelb markiert.
 export interface Provider {
   readonly name: string;
   /// Kurzname für Überschriften; `name` ist die volle Firma mit Rechtsform.
@@ -31,7 +31,7 @@ export const PROVIDER: Provider = {
   country: 'Deutschland',
   representative: 'Shady Paul Coll Exposito',
   email: 'shady.collexposito@outlook.de',
-  register: '[PLATZHALTER: Registergericht und HRB-Nummer]',
+  register: 'Amtsgericht Charlottenburg, HRB 271070 B',
   vatId: '',
 };
 
