@@ -14,10 +14,19 @@ describe('ImpressumComponent', () => {
   it('renders the Impressum with the § 5 DDG heading and operator details', () => {
     const fixture = TestBed.createComponent(ImpressumComponent);
     fixture.detectChanges();
-    const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
-    expect(fixture.nativeElement.querySelector('h1')?.textContent).toContain('Impressum');
+    const el = fixture.nativeElement as HTMLElement;
+    const text = el.textContent ?? '';
+    expect(el.querySelector('h1')?.textContent).toContain('Impressum');
     expect(text).toContain('§ 5 DDG');
     expect(text).toContain('Maktub Al Kheir UG');
+    expect(text).toContain('Pestalozzistraße 95');
     expect(text).toContain('shady.collexposito');
+  });
+
+  it('marks a missing register entry as a visible placeholder', () => {
+    const fixture = TestBed.createComponent(ImpressumComponent);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('.placeholder')?.textContent).toContain('PLATZHALTER');
   });
 });
