@@ -24,13 +24,14 @@ export type AuthMode = 'loading' | 'confirmed' | 'recovery' | 'invalid';
   selector: 'app-auth',
   imports: [ResetPasswordFormComponent],
   template: `
+    <main class="page">
     @switch (mode()) {
       @case ('loading') {
         <p>Einen Moment…</p>
       }
       @case ('confirmed') {
         <h1>✅ E-Mail bestätigt</h1>
-        <p>Du kannst Sukun jetzt öffnen und nutzen.</p>
+        <p>Du kannst Niyya jetzt öffnen und nutzen.</p>
       }
       @case ('recovery') {
         <app-reset-password-form />
@@ -40,6 +41,7 @@ export type AuthMode = 'loading' | 'confirmed' | 'recovery' | 'invalid';
         <p>Dieser Link ist ungültig oder abgelaufen.</p>
       }
     }
+    </main>
   `,
 })
 export class AuthComponent implements OnInit, OnDestroy {
