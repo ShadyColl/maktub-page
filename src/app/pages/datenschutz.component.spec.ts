@@ -11,18 +11,38 @@ describe('DatenschutzComponent', () => {
     }),
   );
 
-  it('renders the required sections + the honest local-DB note + placeholders', () => {
+  function render(): HTMLElement {
     const fixture = TestBed.createComponent(DatenschutzComponent);
     fixture.detectChanges();
-    const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
-    expect(fixture.nativeElement.querySelector('h1')?.textContent).toContain(
-      'Datenschutzerklärung',
+    return fixture.nativeElement as HTMLElement;
+  }
+
+  it('names the controller and the contact address', () => {
+    const el = render();
+    expect(el.querySelector('h1')?.textContent).toContain('Datenschutzerklärung');
+    expect(el.textContent).toContain('Maktub Al Kheir UG');
+    expect(el.textContent).toContain('shady.collexposito');
+  });
+
+  it('matches the real data flows of the app', () => {
+    const text = render().textContent ?? '';
+    // Fehlerberichte sind seit 2026-10-13 opt-in (L-01).
+    expect(text).toContain('ab Werk ausgeschaltet');
+    // Ehrlich zur unverschlüsselten lokalen Datenbank (W3.3).
+    expect(text).toContain('nicht zusätzlich');
+    // Speichergrenze, Mindestversion, Auftragsverarbeiter.
+    expect(text).toContain('10 MB');
+    expect(text).toContain('Mindestversion');
+    expect(text).toContain('Supabase');
+    expect(text).toContain('GitHub Pages');
+    // Gelöschtes bleibt markiert auf dem Server.
+    expect(text).toContain('als gelöscht markiert');
+  });
+
+  it('links to the account deletion page', () => {
+    const hrefs = Array.from(render().querySelectorAll('a')).map((a) =>
+      a.getAttribute('href'),
     );
-    expect(text).toContain('Verantwortlicher');
-    expect(text).toContain('shady.collexposito');
-    // Honesty about the unencrypted local DB (per the W3.3 decision).
-    expect(text).toContain('nicht gesondert verschlüsselt');
-    // Data-subject rights incl. the built-in deletion/export.
-    expect(text).toContain('Konto-Löschung');
+    expect(hrefs).toContain('/niyya/konto-loeschen');
   });
 });
