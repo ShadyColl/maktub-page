@@ -5,6 +5,8 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { routes } from './app.routes';
 import { ImpressumComponent } from './pages/impressum.component';
 import { DatenschutzComponent } from './pages/datenschutz.component';
+import { NiyyaComponent } from './pages/niyya/niyya.component';
+import { KontoLoeschenComponent } from './pages/niyya/konto-loeschen.component';
 
 describe('app routes', () => {
   beforeEach(() => {
@@ -22,9 +24,22 @@ describe('app routes', () => {
     );
   });
 
+  // Die App verlinkt diesen Pfad und /impressum fest (kImpressumUrl, kDatenschutzUrl).
   it('navigates to /datenschutz -> DatenschutzComponent', async () => {
     const harness = await RouterTestingHarness.create();
     const cmp = await harness.navigateByUrl('/datenschutz');
     expect(cmp).toBeInstanceOf(DatenschutzComponent);
+  });
+
+  it('navigates to /niyya -> NiyyaComponent', async () => {
+    const harness = await RouterTestingHarness.create();
+    const cmp = await harness.navigateByUrl('/niyya');
+    expect(cmp).toBeInstanceOf(NiyyaComponent);
+  });
+
+  it('navigates to /niyya/konto-loeschen -> KontoLoeschenComponent', async () => {
+    const harness = await RouterTestingHarness.create();
+    const cmp = await harness.navigateByUrl('/niyya/konto-loeschen');
+    expect(cmp).toBeInstanceOf(KontoLoeschenComponent);
   });
 });

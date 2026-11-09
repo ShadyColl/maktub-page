@@ -11,15 +11,12 @@ describe('HomeComponent', () => {
     }),
   );
 
-  it('renders the title and links to the legal pages', () => {
+  it('shows the provider and links to the Niyya page', () => {
     const fixture = TestBed.createComponent(HomeComponent);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.querySelector('h1')?.textContent).toContain('maktub');
-    const hrefs = Array.from(el.querySelectorAll('a')).map((a) =>
-      a.getAttribute('href'),
-    );
-    expect(hrefs).toContain('/datenschutz');
-    expect(hrefs).toContain('/impressum');
+    expect(el.querySelector('h1')?.textContent).toContain('Maktub Al Kheir');
+    const hrefs = Array.from(el.querySelectorAll('a')).map((a) => a.getAttribute('href'));
+    expect(hrefs).toContain('/niyya');
   });
 });
